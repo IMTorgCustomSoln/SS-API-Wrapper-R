@@ -3,14 +3,11 @@
 #' This function allows you to express your love of cats.
 #' @param love Do you love cats? Defaults to TRUE.
 #' @keywords api
+#' @import jsonlite
+#' @import httr
 #' @export
 #' @examples
 #' Account()
-
-
-
-library(httr)
-library(jsonlite)
 
 
 
