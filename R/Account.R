@@ -1,14 +1,13 @@
 #' ScrumSaga API Wrapper
 #'
-#' This function allows you to express your love of cats.
-#' @param love Do you love cats? Defaults to TRUE.
+#' Container for Account information
+#' @param 
 #' @keywords api
 #' @import jsonlite
 #' @import httr
 #' @export
 #' @examples
 #' Account()
-
 
 
 
@@ -36,6 +35,9 @@ Account <- function(email, password){
           setToken = function(value){
               return(assign("TOKEN",value,thisEnv))
           },
+          getUrl = function(){
+              return(get("URL_LOCAL",thisEnv))
+          },         
           api_status = function(){
               uri = URL_LOCAL
               resp = GET(uri)
