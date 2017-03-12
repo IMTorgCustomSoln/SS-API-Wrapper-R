@@ -1,15 +1,13 @@
 #' ScrumSaga API Wrapper
 #'
 #' Container and associated functionaity for Projects
-#' @param 
+#' @param
 #' @keywords api
 #' @import jsonlite
 #' @import httr
 #' @export
 #' @examples
 #' Project()
-
-
 
 
 
@@ -27,16 +25,25 @@ Project <- function(account, repo_namespace, repo_email, repo_name){
     rtePathExtract = '/extract'
     
     ACCT = account
-    PAYLOAD=list(
+    PAYLOAD = list(
         namespace = repo_namespace,
         email = repo_email,
         repo = repo_name
     )
+    n = length(argGroups)
+    DF_GROUP = as.list( rep('NA', n) )
+    names(DF_GROUP) = argGroups
 
       me <- list(
           thisEnv = thisEnv,
-          getGroups = function(){
+          getArgGroups = function(){
               return(get("argGroups",thisEnv))
+          },
+          Data = function(){
+              return(get("DF_GROUP",thisEnv))
+          },
+          setData = function(value){
+              return(assign("DF_GROUP",value,thisEnv))
           },
           getAcct = function(){
               return(get("ACCT",thisEnv))
@@ -78,6 +85,17 @@ Project <- function(account, repo_namespace, repo_email, repo_name){
               }
               data = data.frame(jsonlite::fromJSON(content(resp,'text'))$data)
             return(data)
+          },
+          load_all = function(){
+              dfNames = names( me$Data() )
+              newData <- vector("list", length(dfNames))
+              names(newData) <- dfNames
+              for(nm in dfNames ){
+                  rslt <- me$load_group( group = nm )
+                  if( is.data.frame(rslt) ){ newData[[nm]] <- rslt }
+              }
+              me$setData(newData)
+              print('all done!')
           }
         
       )
