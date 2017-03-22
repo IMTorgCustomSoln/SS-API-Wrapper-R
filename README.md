@@ -28,3 +28,16 @@ library(roxygen2)
 document()
 ```
 _push to repo_
+
+
+
+***
+
+<p align="center"><b> Want to discuss software?</b><br>Send me a message <a href="mailto:information@mgmt-tech.org?Subject=Open%20Software" target="_top"></a> information@mgmt-tech.org</p>
+
+***
+
+
+## License
+
+MIT © [Information Management Technologies, LLC](http://mgmt-tech.org)
